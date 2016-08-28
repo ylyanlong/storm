@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true">
+	<property name="LOG_HOME" value="/data/weblog/java/statbgsrv.yy.com" />
+
+	<appender name="error_file"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/web_error_%d{yyyy-MM-dd}_%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<file>${LOG_HOME}/web_error.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="warn_file"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/web_warn_%d{yyyy-MM-dd}_%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<file>${LOG_HOME}/web_warn.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="info_file"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/web_info_%d{yyyy-MM-dd}_%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<file>${LOG_HOME}/web_info.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="debug_file"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/web_debug_%d{yyyy-MM-dd}_%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<file>${LOG_HOME}/web_debug.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!--<appender name="monitor"
+			  class="com.yy.ent.clients.appmonitor.logback.AsyncLogCollectAppender">
+		<filter class="com.yy.ent.clients.appmonitor.logback.EntryConditionFilter" />
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+	</appender>-->
+
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date [%thread] [%level %logger{0}:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--<logger name="com.yy" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="com.yy.entstat.recom.tasks" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>-->
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="debug_file" />
+		<appender-ref ref="warn_file" />
+		<appender-ref ref="info_file" />
+		<appender-ref ref="error_file" />
+		<!--<appender-ref ref="monitor" />-->
+	</root>
+</configuration>
