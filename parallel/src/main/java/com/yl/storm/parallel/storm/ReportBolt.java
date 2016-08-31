@@ -20,14 +20,16 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ReportBolt extends BaseRichBolt {
     private static final Logger LOG = LoggerFactory.getLogger(ReportBolt.class);
     private OutputCollector collector;
+    private TopologyContext context;
 
-    private volatile boolean minRunFlg = true;
+    private static volatile boolean minRunFlg = true;
 
     private static AtomicLong counter = new AtomicLong();
 
     @Override
     public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
         this.collector = collector;
+        this.context = context;
     }
 
     @Override
@@ -43,10 +45,12 @@ public class ReportBolt extends BaseRichBolt {
                 if(true == minRunFlg){
                     minRunFlg = false;
                     //---------todo-begin-------------
+                    int taskid = context.getThisTaskId();
                     Long msgNum = counter.get();
                     counter.getAndSet(0);
                     // LOG.info("topic counter total num:{}", msgNum);
-                    LOG.info("topic counter total thread:{}, num:{}", Thread.currentThread().getName(), msgNum);
+                    LOG.info("topic counter2 total taskid:{} thread:{}, num:{}", taskid, Thread.currentThread().getName(),
+                            msgNum);
                     // LOG.info("ReportBolt GlobleVar num: {}", GlobleVar.getNum());
                     //---------todo-end---------------
                 }

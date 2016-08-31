@@ -1,0 +1,12 @@
+1, 单 Bolt 的测试数据
+//------------------------------------------------
+uid=1&sid=156&name=tom1
+uid=2&sid=256&name=tom2
+uid=3&sid=356&name=tom3
+uid=4&sid=456&name=tom4
+uid=5&sid=556&name=tom5
+uid=6&sid=656&name=tom6
+uid=7&sid=756&name=tom7
+uid=8&sid=856&name=tom8
+uid=9&sid=956&name=tom9
+//------------------------------------------------

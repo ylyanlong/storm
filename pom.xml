@@ -12,6 +12,7 @@
         <module>storm-common</module>
         <module>parallel</module>
         <module>storm-task</module>
+        <module>storm-group</module>
     </modules>
 
 

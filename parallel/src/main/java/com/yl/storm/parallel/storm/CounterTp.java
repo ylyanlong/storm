@@ -46,7 +46,7 @@ public class CounterTp {
         BrokerHosts brokerHosts = new ZkHosts("node1:2181,node2:2181,node3:2181");
         TopologyBuilder builder = new TopologyBuilder();
         Config config = new Config();
-        config.setNumWorkers(3);
+        config.setNumWorkers(2);
 
         if(args.length == 0){
             String TOPOLOGY_NAME = "topicCounter";
@@ -77,7 +77,8 @@ public class CounterTp {
 
             builder.setSpout(KAFKA_SPOUT_Id, kafkaSpout);
             builder.setBolt(PARTITION_BOLT_ID, new PartitionBolt(), 2).setNumTasks(4).shuffleGrouping(KAFKA_SPOUT_Id);
-            builder.setBolt(REPORT_BOLT, new ReportBolt()).globalGrouping(KAFKA_SPOUT_Id);
+            // builder.setBolt(REPORT_BOLT, new ReportBolt()).globalGrouping(KAFKA_SPOUT_Id);
+            builder.setBolt(REPORT_BOLT, new ReportBolt(), 2).setNumTasks(4).globalGrouping(KAFKA_SPOUT_Id);
             //----------------------------------------------------------
 
             LOG.info("going to create topo");

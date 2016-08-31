@@ -21,7 +21,8 @@ public class PartitionBolt extends BaseRichBolt {
     private static final Logger LOG = LoggerFactory.getLogger(PartitionBolt.class);
     private OutputCollector collector;
 
-    private volatile boolean minRunFlg = true;
+    // private volatile boolean minRunFlg = true; // 并没有达到多线程的效果
+    private static volatile boolean minRunFlg = true;
 
     private static AtomicLong counter = new AtomicLong();
 
@@ -46,7 +47,7 @@ public class PartitionBolt extends BaseRichBolt {
                     //---------todo-begin-------------
                     Long msgNum = counter.get();
                     counter.getAndSet(0);
-                    LOG.info("topic counter partitionBolt thread:{}, num:{}", Thread.currentThread().getName(), msgNum);
+                    LOG.info("topic counter2 partitionBolt thread:{}, num:{}", Thread.currentThread().getName(), msgNum);
                     // LOG.info("PartitionBolt GlobleVar num: {}", GlobleVar.getNum());
                     //---------todo-end---------------
                 }
